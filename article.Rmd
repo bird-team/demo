@@ -125,7 +125,7 @@ Here's a "line block":
 
 and images can be specified like so:
 
-![example image](https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg "A caption")
+![example image](assets/bird.jpg)
 
 Plots and maps can be produced using code too.
 
