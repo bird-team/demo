@@ -15,9 +15,11 @@ install:
 	docker pull brisbanebirdteam/docker:latest
 
 clean:
-	rm -f article.pdf
-	rm -f article.md
-	rm -f article.docx
-	rm -rf article_files
+	@rm -f article.pdf
+	@rm -f article.md
+	@rm -f article.docx
+	@rm -f article.log
+	@rm -f article.tex
+	@rm -rf article_files
 
 .PHONY: all clean article install
