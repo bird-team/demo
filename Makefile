@@ -1,22 +1,22 @@
 all: article
 
-article: article.pdf article.md article.docx
+article: install article.pdf article.md article.docx
 
-article.docx: install article.Rmd
+article.docx: article.Rmd
 	docker run --name=brisbanebird -dt 'brisbanebirdteam/docker:latest' \
 	&& docker cp . brisbanebird:/tmp/ \
 	&& docker exec brisbanebird sh -c "R -e \"rmarkdown::render('/tmp/article.Rmd', output_format = 'word_document', clean = TRUE)\"" \
 	&& docker cp brisbanebird:/tmp/article.docx . || true
 	docker stop brisbanebird || true && docker rm brisbanebird || true
 
-article.pdf: install article.Rmd
+article.pdf: article.Rmd
 	@docker run --name=brisbanebird -dt 'brisbanebirdteam/docker:latest' \
 	&& docker cp . brisbanebird:/tmp/ \
 	&& docker exec brisbanebird sh -c "R -e \"rmarkdown::render('/tmp/article.Rmd', output_format = 'pdf_document', clean = TRUE)\"" \
 	&& docker cp brisbanebird:/tmp/article.pdf . || true
 	@docker stop brisbanebird || true && docker rm brisbanebird || true
 
-article.md: install article.Rmd
+article.md: article.Rmd
 	docker run --name=brisbanebird -dt 'brisbanebirdteam/docker:latest' \
 	&& docker cp . brisbanebird:/tmp/ \
 	&& docker exec brisbanebird sh -c "R -e \"rmarkdown::render('/tmp/article.Rmd', output_format = 'github_document', clean = TRUE, output_options = list(html_preview = FALSE))\"" \
@@ -37,5 +37,6 @@ clean:
 	@rm -f article.out
 	@rm -f article.fdb_latexmk
 	@rm -rf article_files
+	@docker stop brisbanebird || true && docker rm brisbanebird || true
 
 .PHONY: all clean article install
