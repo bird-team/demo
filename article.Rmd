@@ -59,6 +59,7 @@ Now a nested list:
 
 	find wooden spoon
 	uncover pot
+  cover plot
 	stir
 	cover pot
 	balance wooden spoon precariously on pot handle
